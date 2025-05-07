@@ -10,9 +10,9 @@ import receive_sharing_intent
 
 class ShareViewController: RSIShareViewController {
     
-    // Use this method to return false if you don't want to redirect to host app automatically.
+    // Use this method to return false if you don't want to hide Post Popup
     // Default is true
-    override func shouldAutoRedirect() -> Bool {
+    override func ignorePostPopup() -> Bool {
         return false
     }
     

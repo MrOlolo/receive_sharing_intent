@@ -18,7 +18,7 @@ open class RSIShareViewController: SLComposeServiceViewController {
 
     /// Override this method to return false if you don't want to redirect to host app automatically
     /// Default is true
-    open func shouldAutoRedirect() -> Bool {
+    open func ignorePostPopup() -> Bool {
         return true
     }
 
@@ -31,8 +31,15 @@ open class RSIShareViewController: SLComposeServiceViewController {
 
         // load group and app id from build info
         loadIds()
-        fetchContent()
-        
+
+        if ignorePostPopup() {
+            fetchContent()
+            Timer.scheduledTimer(
+                timeInterval: 0.2, target: self,
+                selector: #selector(self.didSelectPost), userInfo: nil,
+                repeats: false)
+
+        }
 
     }
 
@@ -43,6 +50,9 @@ open class RSIShareViewController: SLComposeServiceViewController {
 
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if !ignorePostPopup() {
+            fetchContent()
+        }
 
     }
 
@@ -137,11 +147,7 @@ open class RSIShareViewController: SLComposeServiceViewController {
                 mimeType: type == .text ? "text/plain" : nil,
                 type: type
             ))
-        if index == (content.attachments?.count ?? 0) - 1 {
-            if shouldAutoRedirect() {
-                saveAndRedirect()
-            }
-        }
+
     }
 
     private func handleMedia(
@@ -161,11 +167,7 @@ open class RSIShareViewController: SLComposeServiceViewController {
                     type: type
                 ))
         }
-        if index == (content.attachments?.count ?? 0) - 1 {
-            if shouldAutoRedirect() {
-                saveAndRedirect()
-            }
-        }
+
     }
 
     private func handleMedia(
@@ -201,12 +203,6 @@ open class RSIShareViewController: SLComposeServiceViewController {
                         mimeType: url.mimeType(),
                         type: type
                     ))
-            }
-        }
-
-        if index == (content.attachments?.count ?? 0) - 1 {
-            if shouldAutoRedirect() {
-                saveAndRedirect()
             }
         }
     }
