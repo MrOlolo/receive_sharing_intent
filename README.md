@@ -1,4 +1,5 @@
 # receive_sharing_intent
+
 [![pub package](https://img.shields.io/pub/v/receive_sharing_intent.svg)](https://pub.dev/packages/receive_sharing_intent)
 
 A Flutter plugin that enables flutter apps to receive sharing photos, videos, text, urls or any other file types from another app.
@@ -6,16 +7,11 @@ A Flutter plugin that enables flutter apps to receive sharing photos, videos, te
 Also, supports iOS Share extension and launching the host app automatically.
 Check the provided [example](./example/lib/main.dart) for more info.
 
-
-
 |             | Android                 | iOS               |
 |-------------|-------------------------|-------------------|
 | **Support** | SDK 19+ (Kotlin 1.9.22) | 12.0+ (Swift 5.0) |
 
-
-
 ![Alt Text](./example/demo.gif)
-
 
 # Usage
 
@@ -127,7 +123,7 @@ Add the following filters to your [android/app/src/main/AndroidManifest.xml](./e
 
 Make sure the deployment target for Runner.app and the share extension is the same.
 
-#### 2. Replace your [ios/Share Extension/Info.plist](./example/ios/Share%20Extension/Info.plist) with the following:
+#### 2. Replace your [ios/Share Extension/Info.plist](./example/ios/Share%20Extension/Info.plist) with the following
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -136,11 +132,11 @@ Make sure the deployment target for Runner.app and the share extension is the sa
   <dict>
     <key>AppGroupId</key>
     <string>$(CUSTOM_GROUP_ID)</string>
-	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
-	<key>NSExtension</key>
-	<dict>
-		<key>NSExtensionAttributes</key>
+ <key>CFBundleVersion</key>
+ <string>$(FLUTTER_BUILD_NUMBER)</string>
+ <key>NSExtension</key>
+ <dict>
+  <key>NSExtensionAttributes</key>
         <dict>
             <key>PHSupportedMediaTypes</key>
                <array>
@@ -155,9 +151,9 @@ Make sure the deployment target for Runner.app and the share extension is the sa
                 <key>NSExtensionActivationSupportsText</key>
                 <true/>
                 <!--TODO: Add this tag, if you want to support sharing urls into your app-->
-            	<key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
-            	<integer>1</integer>
-            	<!--TODO: Add this flag, if you want to support sharing images into your app-->
+             <key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
+             <integer>1</integer>
+             <!--TODO: Add this flag, if you want to support sharing images into your app-->
                 <key>NSExtensionActivationSupportsImageWithMaxCount</key>
                 <integer>100</integer>
                 <!--TODO: Add this flag, if you want to support sharing video into your app-->
@@ -165,43 +161,43 @@ Make sure the deployment target for Runner.app and the share extension is the sa
                 <integer>100</integer>
                 <!--TODO: Add this flag, if you want to support sharing other files into your app-->
                 <!--Change the integer to however many files you want to be able to share at a time-->
-				<key>NSExtensionActivationSupportsFileWithMaxCount</key>
-				<integer>1</integer>
+    <key>NSExtensionActivationSupportsFileWithMaxCount</key>
+    <integer>1</integer>
             </dict>
         </dict>
-		<key>NSExtensionMainStoryboard</key>
-		<string>MainInterface</string>
-		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.share-services</string>
-	</dict>
+  <key>NSExtensionMainStoryboard</key>
+  <string>MainInterface</string>
+  <key>NSExtensionPointIdentifier</key>
+  <string>com.apple.share-services</string>
+ </dict>
   </dict>
 </plist>
 ```
-#### 3. Add the following to your [ios/Runner/Info.plist](./example/ios/Runner/Info.plist):
+
+#### 3. Add the following to your [ios/Runner/Info.plist](./example/ios/Runner/Info.plist)
 
 ```xml
 ...
 <key>AppGroupId</key>
 <string>$(CUSTOM_GROUP_ID)</string>
 <key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>ShareMedia-$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-			</array>
-		</dict>
-	</array>
+ <array>
+  <dict>
+   <key>CFBundleTypeRole</key>
+   <string>Editor</string>
+   <key>CFBundleURLSchemes</key>
+   <array>
+    <string>ShareMedia-$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+   </array>
+  </dict>
+ </array>
 
 <key>NSPhotoLibraryUsageDescription</key>
 <string>To upload photos, please allow permission to access your photo library.</string>
 ...
 ```
 
-#### 4. Add the following to your [ios/Runner/Runner.entitlements](./example/ios/Runner/Runner.entitlements):
-
+#### 4. Add the following to your [ios/Runner/Runner.entitlements](./example/ios/Runner/Runner.entitlements)
 
 ```xml
 ....
@@ -213,8 +209,8 @@ Make sure the deployment target for Runner.app and the share extension is the sa
 ....
 ```
 
+#### 5. Add the following to your [ios/Podfile](./example/ios/Podfile)
 
-#### 5. Add the following to your [ios/Podfile](./example/ios/Podfile):
 ```ruby
 ...
 target 'Runner' do
@@ -233,15 +229,13 @@ end
 
 #### 6. Add Runner and Share Extension in the same group
 
-* Go to `Signing & Capabilities` tab and add App Groups capability in **BOTH** Targets: `Runner` and `Share Extension` 
-* Add a new container with the name of your choice. For example `group.MyContainer` in the example project its `group.com.kasem.ShareExtention`
-* Add User-defined(`Build Settings -> +`) string `CUSTOM_GROUP_ID` in **BOTH** Targets: `Runner` and `Share Extension` and set value to group id created above. You can use different group ids depends on your flavor schemes
+- Go to `Signing & Capabilities` tab and add App Groups capability in **BOTH** Targets: `Runner` and `Share Extension`
+- Add a new container with the name of your choice. For example `group.MyContainer` in the example project its `group.com.kasem.ShareExtention`
+- Add User-defined(`Build Settings -> +`) string `CUSTOM_GROUP_ID` in **BOTH** Targets: `Runner` and `Share Extension` and set value to group id created above. You can use different group ids depends on your flavor schemes
 
-#### 7. Go to Build Phases of your Runner target and move `Embed Foundation Extension` to the top of `Thin Binary`. 
+#### 7. Go to Build Phases of your Runner target and move `Embed Foundation Extension` to the top of `Thin Binary`
 
-
-#### 8. Make your `ShareViewController`  [ios/Share Extension/ShareViewController.swift](./example/ios/Share%20Extension/ShareViewController.swift) inherit from `RSIShareViewController`:
-
+#### 8. Make your `ShareViewController`  [ios/Share Extension/ShareViewController.swift](./example/ios/Share%20Extension/ShareViewController.swift) inherit from `RSIShareViewController`
 
 ```swift
 // If you get no such module 'receive_sharing_intent' error. 
@@ -262,18 +256,16 @@ class ShareViewController: RSIShareViewController {
 
 #### Compiling issues and their fixes
 
-* Error: No such module 'receive_sharing_intent'
-  * Fix: Go to Build Phases of your Runner target and move `Embed Foundation Extension` to the top of `Thin Binary`.
+- Error: No such module 'receive_sharing_intent'
+  - Fix: Go to Build Phases of your Runner target and move `Embed Foundation Extension` to the top of `Thin Binary`.
   
-* Error: App does not build after adding Share Extension?
-  * Fix: Check Build Settings of your share extension and remove everything that tries to import Cocoapods from your main project. i.e. remove everything under `Linking/Other Linker Flags` 
+- Error: App does not build after adding Share Extension?
+  - Fix: Check Build Settings of your share extension and remove everything that tries to import Cocoapods from your main project. i.e. remove everything under `Linking/Other Linker Flags`
 
-* You might need to disable bitcode for the extension target
+- You might need to disable bitcode for the extension target
 
-* Error: Invalid Bundle. The bundle at 'Runner.app/Plugins/Sharing Extension.appex' contains disallowed file 'Frameworks'
-    * Fix: https://stackoverflow.com/a/25789145/2061365
-
-
+- Error: Invalid Bundle. The bundle at 'Runner.app/Plugins/Sharing Extension.appex' contains disallowed file 'Frameworks'
+  - Fix: <https://stackoverflow.com/a/25789145/2061365>
 
 ## Full Example
 
@@ -354,4 +346,3 @@ class _MyAppState extends State<MyApp> {
   }
 }
 ```
-
