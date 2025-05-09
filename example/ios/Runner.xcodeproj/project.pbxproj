@@ -12,7 +12,6 @@
 		504BE6B2CE03F41B7D7E8984 /* Pods_Share_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51C3942338DC6F9F1BCEAD0E /* Pods_Share_Extension.framework */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		8072EBCB2B6191600035633A /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8072EBCA2B6191600035633A /* ShareViewController.swift */; };
-		8072EBCE2B6191600035633A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8072EBCC2B6191600035633A /* MainInterface.storyboard */; };
 		8072EBD22B6191600035633A /* Share Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8072EBC82B6191600035633A /* Share Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8072EC0A2B714FDD0035633A /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8072EC092B714FDD0035633A /* UniformTypeIdentifiers.framework */; };
 		8072EC0D2B714FDD0035633A /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8072EC0C2B714FDD0035633A /* Media.xcassets */; };
@@ -84,7 +83,6 @@
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		8072EBC82B6191600035633A /* Share Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Share Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8072EBCA2B6191600035633A /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
-		8072EBCD2B6191600035633A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		8072EBCF2B6191600035633A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8072EBD72B61937D0035633A /* Share Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Share Extension.entitlements"; sourceTree = "<group>"; };
 		8072EC082B714FDD0035633A /* ActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,7 +147,6 @@
 			children = (
 				8072EBD72B61937D0035633A /* Share Extension.entitlements */,
 				8072EBCA2B6191600035633A /* ShareViewController.swift */,
-				8072EBCC2B6191600035633A /* MainInterface.storyboard */,
 				8072EBCF2B6191600035633A /* Info.plist */,
 			);
 			path = "Share Extension";
@@ -353,7 +350,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8072EBCE2B6191600035633A /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,14 +514,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8072EBCC2B6191600035633A /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8072EBCD2B6191600035633A /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
 		8072EC102B714FDD0035633A /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

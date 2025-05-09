@@ -8,17 +8,8 @@
 //
 import receive_sharing_intent
 
-class ShareViewController: RSIShareViewController {
+//class ShareViewController: RSIShareViewController {
+class ShareViewController: InvisibleShareViewController {
     
-    // Use this method to return false if you don't want to hide Post Popup
-    // Default is true
-    override func ignorePostPopup() -> Bool {
-        return false
-    }
-    
-    // Use this to change label of Post button
-    override func presentationAnimationDidFinish() {
-        super.presentationAnimationDidFinish()
-        navigationController?.navigationBar.topItem?.rightBarButtonItem?.title = "Open"
-    }
+
 }
