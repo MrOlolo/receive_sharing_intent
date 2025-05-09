@@ -123,7 +123,7 @@ Add the following filters to your [android/app/src/main/AndroidManifest.xml](./e
 
 Make sure the deployment target for Runner.app and the share extension is the same.
 
-#### 2. Replace your [ios/Share Extension/Info.plist](./example/ios/Share%20Extension/Info.plist) with the following
+#### 2.1 Replace your [ios/Share Extension/Info.plist](./example/ios/Share%20Extension/Info.plist) with the following
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -167,6 +167,58 @@ Make sure the deployment target for Runner.app and the share extension is the sa
         </dict>
   <key>NSExtensionMainStoryboard</key>
   <string>MainInterface</string>
+  <key>NSExtensionPointIdentifier</key>
+  <string>com.apple.share-services</string>
+ </dict>
+  </dict>
+</plist>
+```
+
+
+#### 2.2 For [InvisibleShareViewController] Replace your [ios/Share Extension/Info.plist](./example/ios/Share%20Extension/Info.plist) with the following
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>AppGroupId</key>
+    <string>$(CUSTOM_GROUP_ID)</string>
+ <key>CFBundleVersion</key>
+ <string>$(FLUTTER_BUILD_NUMBER)</string>
+ <key>NSExtension</key>
+ <dict>
+  <key>NSExtensionAttributes</key>
+        <dict>
+            <key>PHSupportedMediaTypes</key>
+               <array>
+                    <!--TODO: Add this flag, if you want to support sharing video into your app-->
+                   <string>Video</string>
+                   <!--TODO: Add this flag, if you want to support sharing images into your app-->
+                   <string>Image</string>
+               </array>
+            <key>NSExtensionActivationRule</key>
+            <dict>
+                <!--TODO: Add this flag, if you want to support sharing text into your app-->
+                <key>NSExtensionActivationSupportsText</key>
+                <true/>
+                <!--TODO: Add this tag, if you want to support sharing urls into your app-->
+             <key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
+             <integer>1</integer>
+             <!--TODO: Add this flag, if you want to support sharing images into your app-->
+                <key>NSExtensionActivationSupportsImageWithMaxCount</key>
+                <integer>100</integer>
+                <!--TODO: Add this flag, if you want to support sharing video into your app-->
+                <key>NSExtensionActivationSupportsMovieWithMaxCount</key>
+                <integer>100</integer>
+                <!--TODO: Add this flag, if you want to support sharing other files into your app-->
+                <!--Change the integer to however many files you want to be able to share at a time-->
+    <key>NSExtensionActivationSupportsFileWithMaxCount</key>
+    <integer>1</integer>
+            </dict>
+        </dict>
+  <key>NSExtensionPrincipalClass</key>
+  <string>InvisibleShareViewController</string>
   <key>NSExtensionPointIdentifier</key>
   <string>com.apple.share-services</string>
  </dict>
@@ -235,7 +287,7 @@ end
 
 #### 7. Go to Build Phases of your Runner target and move `Embed Foundation Extension` to the top of `Thin Binary`
 
-#### 8. Make your `ShareViewController`  [ios/Share Extension/ShareViewController.swift](./example/ios/Share%20Extension/ShareViewController.swift) inherit from `RSIShareViewController`
+#### 8.1. Make your `ShareViewController`  [ios/Share Extension/ShareViewController.swift](./example/ios/Share%20Extension/ShareViewController.swift) inherit from `RSIShareViewController`
 
 ```swift
 // If you get no such module 'receive_sharing_intent' error. 
@@ -251,6 +303,19 @@ class ShareViewController: RSIShareViewController {
         return false
     }
     
+}
+```
+
+#### 8.2. For [InvisibleShareViewController] Make your `ShareViewController`  [ios/Share Extension/ShareViewController.swift](./example/ios/Share%20Extension/ShareViewController.swift) inherit from `InvisibleShareViewController`
+
+```swift
+// If you get no such module 'receive_sharing_intent' error. 
+// Go to Build Phases of your Runner target and
+// move `Embed Foundation Extension` to the top of `Thin Binary`. 
+import receive_sharing_intent
+
+class ShareViewController: InvisibleShareViewController {
+
 }
 ```
 
